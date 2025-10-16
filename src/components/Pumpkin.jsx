@@ -93,7 +93,7 @@ function Game()
 
     //put return in while loop
     //  while time != 0 and pumpkinTypes[3].count === 0
-    if(timer > 0 && pumpkinType[3].count === 0)
+    do
     {
         return(
         <div>
@@ -111,16 +111,17 @@ function Game()
 
         </div>
         )
-    }
-    else
-    {
-        return(
-            <div>
-                <h2>Game Over!</h2>
-                {/* <p>You clicked {pumkinTypes[0].count}/p> */}
-            </div>
-        )
-    }
+    }while(timer < 0 && pumpkinType[3].count === 0)
+
+    // else
+    // {
+    //     return(
+    //         <div>
+    //             <h2>Game Over!</h2>
+    //             {/* <p>You clicked {pumkinTypes[0].count}/p> */}
+    //         </div>
+    //     )
+    // }
 }
 
 export default Game
