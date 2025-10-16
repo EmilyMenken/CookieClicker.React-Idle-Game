@@ -27,12 +27,6 @@ function Game()
         color: "orange",
         count: 0
     }]);
-
-
-    function handleClick()
-    {
-        console.log("CLICKED");
-    }
     
     function randImg()
     {
@@ -55,10 +49,12 @@ function Game()
         }
     }
 
+    
+
     return(
         <div>
-            
-            <button onClick={handleClick}><img src={randImg()} alt="pumpkin"/></button>
+            <p>Current Clicks: {clickCount}</p>
+            <button onClick={() => setCount(count + 1)}><img src={randImg()} alt="pumpkin"/></button>
 
         </div>
     )
