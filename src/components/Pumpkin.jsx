@@ -30,8 +30,6 @@ function Game()
             <p>Current Clicks: {clickCount}</p>
             <button onClick={handleClick}><img src="./assets/pumpkinIcon.jpg" alt="icon"/></button>
         </div>
-            
-        
     )
 }
 
