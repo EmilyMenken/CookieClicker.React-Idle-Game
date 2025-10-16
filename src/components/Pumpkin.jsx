@@ -28,14 +28,32 @@ function Game()
     }]);
 
 
-    function handleClick(){
+    function handleClick()
+    {
         console.log("CLICKED");
-  }
+    }
     
+    function randImg()
+    {
+        const rand = Math.floor(Math.random() * 3); // 0 - 2
+        if(rand === 0)
+        {
+            return pumpkinOrange
+        }
+        else if(rand === 1)
+        {
+            return pumpkinPeach
+        }
+        else //rand === 3
+        {
+            return pumpkinOrange
+        }
+    }
+
     return(
         <div>
             
-            <button onClick={handleClick}><img src={pumpkinGroup} alt="icon"/></button>
+            <button onClick={handleClick}><img src={randImg()} alt="pumpkin"/></button>
 
         </div>
     )
