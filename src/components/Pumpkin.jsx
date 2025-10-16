@@ -12,7 +12,7 @@ let timer;
 function Game()
 {
     const [clickCount, setCount] = useState(0);
-    const [rotten, setEndGame] = useState(false);
+    // const [rotten, setEndGame] = useState(false);
     const [pumpkinType, setType] = useState([{
         size: "small",
         color: "yellow",
