@@ -1,5 +1,12 @@
 import { useState } from "react";
 
+import pumpkinYellow from "../assets/pumpkinA.png";
+import pumpkinPeach from "../assets/pumpkinB.png";
+import pumpkinOrange from "../assets/pumpkinC.png";
+import pumpkinGroup from "../assets/pumpkinGroup.png";
+
+
+
 function Game()
 {
     const [clickCount, setCount] = useState(0);
@@ -28,7 +35,7 @@ function Game()
     return(
         <div>
             
-            <button onClick={handleClick}><img src="./assets/pumpkinIcon.jpg" alt="icon"/></button>
+            <button onClick={handleClick}><img src={pumpkinGroup} alt="icon"/></button>
 
         </div>
     )
