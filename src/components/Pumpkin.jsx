@@ -38,16 +38,11 @@ function Game()
             <button onClick={handleClick}><img src={pumpkinGroup} alt="icon"/></button>
 
         </div>
+            
+        
     )
 }
 
 
 
 export default Game
-
-// p1
-//  small, yellow
-// p2
-//  medium, peach
-// p3
-// large, orange
