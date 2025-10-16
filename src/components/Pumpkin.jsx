@@ -96,7 +96,7 @@ function Game()
     do
     {
         return(
-        <div>
+        <div className="main">
             <h1> {timeLeft} seconds </h1>
             <button className= "timerButton" onClick={startTimer}>Start Timer</button>
             <button className= "timerButton" onClick={stopTimer}>Stop Timer</button>
