@@ -93,7 +93,9 @@ function Game()
 
     //put return in while loop
     //  while time != 0 and pumpkinTypes[3].count === 0
-    return(
+    if(timer > 0 && pumpkinType[3].count === 0)
+    {
+        return(
         <div>
             <h1> {timeLeft} seconds </h1>
             <button className= "timerButton" onClick={startTimer}>Start Timer</button>
@@ -103,9 +105,22 @@ function Game()
             <button className= "pumpkinButton" onClick={handleClick}><img src={pumpkinGroup} alt="icon"/></button>
             <p>Current Clicks: {clickCount}</p>
             <button className= "pumpkinButton" onClick={() => setCount(count + 1)}><img src={randImg()} alt="pumpkin"/></button>
+            {/* <button onClick={handleClick}><img src={pumpkinGroup} alt="icon"/></button> */}
+            <p>Current Clicks: {clickCount}</p>
+            <button onClick={() => setCount(clickCount + 1)}><img src={randImg()} alt="pumpkin"/></button>
 
         </div>
-    )
+        )
+    }
+    else
+    {
+        return(
+            <div>
+                <h2>Game Over!</h2>
+                {/* <p>You clicked {pumkinTypes[0].count}/p> */}
+            </div>
+        )
+    }
 }
 
 export default Game
