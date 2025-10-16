@@ -105,10 +105,6 @@ function Game()
             <button className= "pumpkinButton" onClick={handleClick}><img src={pumpkinGroup} alt="icon"/></button>
             <p>Current Clicks: {clickCount}</p>
             <button className= "pumpkinButton" onClick={() => setCount(clickCount + 1)}><img src={randImg()} alt="pumpkin"/></button>
-            <button onClick={handleClick}><img src={pumpkinGroup} alt="icon"/></button>
-            <p>Current Clicks: {clickCount}</p>
-            <button onClick={() => setCount(clickCount + 1)}><img src={randImg()} alt="pumpkin"/></button>
-
         </div>
         )
     }while(timer < 0 && pumpkinType[3].count === 0)
