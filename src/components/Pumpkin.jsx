@@ -4,6 +4,7 @@ import pumpkinYellow from "../assets/pumpkinA.png";
 import pumpkinPeach from "../assets/pumpkinB.png";
 import pumpkinOrange from "../assets/pumpkinC.png";
 import pumpkinGroup from "../assets/pumpkinGroup.png";
+import pumpkinRotten from "../assets/pumpkinRotten";
 
 
 
@@ -35,18 +36,22 @@ function Game()
     
     function randImg()
     {
-        const rand = Math.floor(Math.random() * 3); // 0 - 2
+        const rand = Math.floor(Math.random() * 4); // 0 - 3
         if(rand === 0)
         {
-            return pumpkinOrange
+            return pumpkinYellow
         }
         else if(rand === 1)
         {
             return pumpkinPeach
         }
-        else //rand === 3
+        else if(rand === 3)
         {
             return pumpkinOrange
+        }
+        else //rand === 4
+        {
+            return pumpkinRotten
         }
     }
 
