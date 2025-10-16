@@ -93,31 +93,28 @@ function Game()
 
     //put return in while loop
     //  while time != 0 and pumpkinTypes[3].count === 0
-    do
+    let flag = true;
+    if(flag)
     {
-        return(
-        <div>
-            <h1> {timeLeft} seconds </h1>
-            <button className= "timerButton" onClick={startTimer}>Start Timer</button>
-            <button className= "timerButton" onClick={stopTimer}>Stop Timer</button>
-            <button className= "timerButton" onClick={resetTimer}>Reset Timer</button>
-            
-            <button className= "pumpkinButton" onClick={handleClick}><img src={pumpkinGroup} alt="icon"/></button>
-            <p>Current Clicks: {clickCount}</p>
-            <button className= "pumpkinButton" onClick={() => setCount(clickCount + 1)}><img src={randImg()} alt="pumpkin"/></button>
-        </div>
-        )
-    }while(timer < 0 && pumpkinType[3].count === 0)
-
-    // else
-    // {
-    //     return(
-    //         <div>
-    //             <h2>Game Over!</h2>
-    //             {/* <p>You clicked {pumkinTypes[0].count}/p> */}
-    //         </div>
-    //     )
-    // }
+        do
+        {
+            return(
+            <div>
+                <h1> {timeLeft} seconds </h1>
+                <button className= "timerButton" onClick={startTimer}>Start Timer</button>
+                <button className= "timerButton" onClick={stopTimer}>Stop Timer</button>
+                <button className= "timerButton" onClick={resetTimer}>Reset Timer</button>
+                
+                <button className= "pumpkinButton" onClick={handleClick}><img src={pumpkinGroup} alt="icon"/></button>
+                <p>Current Clicks: {clickCount}</p>
+                <button className= "pumpkinButton" onClick={() => setCount(clickCount + 1)}><img src={randImg()} alt="pumpkin"/></button>
+            </div>
+            )
+        }while(timer < 0 && pumpkinType[3].count === 0)
+    }
+    return(
+        <p>Game Over</p>
+    )
 }
 
 export default Game
