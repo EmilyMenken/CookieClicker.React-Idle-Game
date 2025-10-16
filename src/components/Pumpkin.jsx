@@ -26,6 +26,11 @@ function Game()
         size: "large",
         color: "orange",
         count: 0
+    },
+    {
+        size: "rotten",
+        color: "brown",
+        count: 0
     }]);
     
     function randImg()
@@ -49,8 +54,9 @@ function Game()
         }
     }
 
-    
 
+    //put return in while loop
+    //  while time != 0 and pumpkinTypes[3].count === 0
     return(
         <div>
             <p>Current Clicks: {clickCount}</p>
