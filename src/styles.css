@@ -1,0 +1,23 @@
+.pumpkinButton{
+
+    background-color: #499F68;
+
+}
+
+.pumpkinButton:hover{
+
+    background-color: #75c191;
+
+}
+
+.timerButton{
+
+    background-color: #D0C4DF;
+
+}
+
+.timerButton:hover{
+
+    background-color: #bda5da;
+
+}

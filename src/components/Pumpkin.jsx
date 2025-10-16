@@ -4,7 +4,7 @@ import pumpkinYellow from "../assets/pumpkinA.png";
 import pumpkinPeach from "../assets/pumpkinB.png";
 import pumpkinOrange from "../assets/pumpkinC.png";
 import pumpkinGroup from "../assets/pumpkinGroup.png";
-import pumpkinRotten from "../assets/pumpkinRotten";
+import pumpkinRotten from "../assets/pumpkinRotten.png";
 
 let timer;
 
@@ -96,13 +96,13 @@ function Game()
     return(
         <div>
             <h1> {timeLeft} seconds </h1>
-            <button onClick={startTimer}>Start Timer</button>
-            <button onClick={stopTimer}>Stop Timer</button>
-            <button onClick={resetTimer}>Reset Timer</button>
+            <button className= "timerButton" onClick={startTimer}>Start Timer</button>
+            <button className= "timerButton" onClick={stopTimer}>Stop Timer</button>
+            <button className= "timerButton" onClick={resetTimer}>Reset Timer</button>
             
-            <button onClick={handleClick}><img src={pumpkinGroup} alt="icon"/></button>
+            <button className= "pumpkinButton" onClick={handleClick}><img src={pumpkinGroup} alt="icon"/></button>
             <p>Current Clicks: {clickCount}</p>
-            <button onClick={() => setCount(count + 1)}><img src={randImg()} alt="pumpkin"/></button>
+            <button className= "pumpkinButton" onClick={() => setCount(count + 1)}><img src={randImg()} alt="pumpkin"/></button>
 
         </div>
     )
