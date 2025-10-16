@@ -3,7 +3,7 @@ import { useState } from "react";
 function Game()
 {
     const [clickCount, setCount] = useState(0);
-    const [rotten, setEndGame] = useState(flase);
+    const [rotten, setEndGame] = useState(false);
     const [pumpkinType, setType] = ([{
         size: "small",
         color: "yellow",
@@ -23,16 +23,9 @@ function Game()
     
     return(
         <div>
-        
+            <p>Current Clicks: {clickCount}</p>
         </div>
     )
 }
 
 export default Game
-
-// p1
-//  small, yellow
-// p2
-//  medium, peach
-// p3
-// large, orange
