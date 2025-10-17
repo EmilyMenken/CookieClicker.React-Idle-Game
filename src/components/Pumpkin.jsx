@@ -12,7 +12,7 @@ let timer;
 function Game()
 {
     const [clickCount, setCount] = useState(0);
-    // const [rotten, setEndGame] = useState(false);
+    const [gameOver, setGameOver] = useState(false);
     const [pumpkinType, setType] = useState([{
         size: "small",
         color: "Yellow",
@@ -73,19 +73,44 @@ function Game()
 //get random image function
     function randImg()
     {
-        const rand = Math.floor(Math.random() * pumpkinType.length); // 0 - 3
-        return pumpkinType[rand];
+        if(!gameOver)
+        {
+            const rand = Math.floor(Math.random() * pumpkinType.length); // 0 - 3
+            return pumpkinType[rand];
+        }
     }
-    const randImg = randImg().img
+
+    const randomImg = randImg().img
 
 
     function handleClick() {
-        setType(prevImages =>
-            prevImages.map(pumpkinType =>
-            pumpkinType.img === randomImage.img
-                ? { ...pumpkinType, count: pumpkinType.count + 1 } // increment only specific pumpkins count
-                : pumpkinType
-    ));}
+        if(gameOver)
+            return;
+        
+        if(!randomImg)
+            return;
+        
+        if(randomImg.img = pumpkinRotten)
+        {
+            setGameOver(true);
+            return;
+        }
+
+        setCount(c => c + 1);
+
+        setType(function(prevImages) {
+            const updated = prevImages.map(function(pImg){
+                if(pImg.img === randomImg)
+                {
+                    return{...pImg, count: pImg.count + 1};
+                }
+                else
+                {
+                    return pImg;
+                }
+            });
+            return updated
+        })}
 
     const flag = true;
     if(flag)
@@ -105,18 +130,19 @@ function Game()
         </div>
         )
     }while(timer < 0 && clickCount > 0) 
-        
+
     return(
         <div className="game-over">
             <h2>Game Over!</h2>
             <h4>Stats:</h4>
             <p>You had {clickCount} clicks left</p>
-            <p>You clicked a total {pumpkinType[0].count + pumpkinType[1].count + pumpkinType[2].count + pumpkinType[3].count} times</p>
+            <p>You clicked a total {clickCount} times</p>
             <ul>
                 {pumpkinType.map(p => (
                     <li>{p.color} pumpkin clicks: {p.count}</li>
                 ))}
             </ul>
+            
         </div>
     )
 }
