@@ -15,19 +15,19 @@ function Game()
     // const [rotten, setEndGame] = useState(false);
     const [pumpkinType, setType] = useState([{
         size: "small",
-        color: "yellow",
+        color: "Yellow",
         img: pumpkinYellow,
         count: 0
     },
     {
         size: "medium",
-        color: "peach",
+        color: "Peach",
         img: pumpkinPeach,
         count: 0
     },
     {
         size: "large",
-        color: "orange",
+        color: "Orange",
         img: pumpkinOrange,
         count: 0
     },
@@ -70,31 +70,22 @@ function Game()
         setTimerRunning(false);
     }
 
-    function handleClick(){
-        console.log("CLICKED"); 
-    }
-
 //get random image function
     function randImg()
     {
-        const rand = Math.floor(Math.random() * 4); // 0 - 3
-        if(rand === 0)
-        {
-            return pumpkinType[0]
-        }
-        else if(rand === 1)
-        {
-            return pumpkinType[1]
-        }
-        else if(rand === 3)
-        {
-            return pumpkinType[2]
-        }
-        else //rand === 4
-        {
-            return pumpkinType[3]
-        }
+        const rand = Math.floor(Math.random() * pumpkinType.length); // 0 - 3
+        return pumpkinType[rand];
     }
+    const randImg = randImg().img
+
+
+    function handleClick() {
+        setType(prevImages =>
+            prevImages.map(pumpkinType =>
+            pumpkinType.img === randomImage.img
+                ? { ...pumpkinType, count: pumpkinType.count + 1 } // increment only specific pumpkins count
+                : pumpkinType
+    ));}
 
     const flag = true;
     if(flag)
@@ -107,12 +98,14 @@ function Game()
             <button className= "timerButton" onClick={stopTimer}>Stop Timer</button>
             <button className= "timerButton" onClick={resetTimer}>Reset Timer</button>
             
-            {/* <button className= "pumpkinButton" onClick={handleClick}><img src={pumpkinGroup} alt="icon"/></button> */}
             <p>Current Clicks: {clickCount}</p>
-            <button className= "pumpkinButton" onClick={() => setCount(clickCount - 1)}><img src={randImg()} alt="pumpkin"/></button>
+            <button className= "pumpkinButton" onClick={handleClick()}>
+                <img src={randImg().img} alt="pumpkin"/>
+            </button>
         </div>
         )
     }while(timer < 0 && clickCount > 0) 
+        
     return(
         <div className="game-over">
             <h2>Game Over!</h2>
@@ -120,10 +113,9 @@ function Game()
             <p>You had {clickCount} clicks left</p>
             <p>You clicked a total {pumpkinType[0].count + pumpkinType[1].count + pumpkinType[2].count + pumpkinType[3].count} times</p>
             <ul>
-                <li id="yellow">Yellow Pumpkin clicks: +{pumpkinType[0].count}</li>
-                <li id="peach">Peach Pumpkin clicks: +{pumpkinType[1].count}</li>
-                <li id="orange">Orange Pumpkin clicks: +{pumpkinType[2].count}</li>
-                <li id="rotten">Rotten Pumpkin clicks: -{pumpkinType[3].count}</li>
+                {pumpkinType.map(p => (
+                    <li>{p.color} pumpkin clicks: {p.count}</li>
+                ))}
             </ul>
         </div>
     )
