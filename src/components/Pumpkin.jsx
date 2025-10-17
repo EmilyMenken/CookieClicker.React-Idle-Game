@@ -33,7 +33,7 @@ function Game()
     },
     {
         size: "rotten",
-        color: "brown",
+        color: "Brown",
         img: pumpkinRotten,
         count: 0
     }]);
@@ -93,6 +93,7 @@ function Game()
         if(randomImg.img = pumpkinRotten)
         {
             setGameOver(true);
+            setCount(c => c + 1);
             return;
         }
 

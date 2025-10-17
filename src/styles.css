@@ -1,36 +1,46 @@
-.pumpkinButton{
-
-    background-color: #499F68;
-
+html {
+  background-color: #7d6d61;
 }
 
-.pumpkinButton:hover{
-
-    background-color: #75c191;
-
+.pumpkinButton {
+  background-color: #499f68;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  transition: background-color 0.2s, transform 0.2s;
+  cursor: pointer;
 }
 
-.timerButton{
-
-    background-color: #D0C4DF;
-
+.pumpkinButton:hover {
+  background-color: #75c191;
+  transform: scale(1.05);
 }
 
-.timerButton:hover{
-
-    background-color: #bda5da;
-
+.timerButton {
+  background-color: #d0c4df;
+  border: none;
+  margin: 0 5px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-html{
-
-    background-color: #7D6D61;
-    color: #df931a;
-
+.timerButton:hover {
+  background-color: #bda5da;
 }
 
-.main{
+.main {
+  background-color: #5e574d;
+  color: #df931a;
+  padding: 20px;
+  text-align: center;
+  border-radius: 16px;
+  max-width: 500px;
+  margin: 2rem auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
 
-    background-color: #5E574D;
-
+.game-over {
+  text-align: center;
 }
