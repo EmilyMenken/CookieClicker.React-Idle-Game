@@ -50,6 +50,8 @@ function Game() {
         clearInterval(timer); 
         clearInterval(pumpkinChangeTimer);
         setTimeLeft(60);
+        setCount(90);
+        setTotalClicks(0);  
         setTimerRunning(false);   
     }
 
@@ -101,6 +103,23 @@ function Game() {
         return;
     }
 
+    setRandomPumpkin(getRandomPumpkin());
+}
+
+    function resetGame() {
+        clearInterval(timer);
+        clearInterval(pumpkinChangeTimer);
+        setCount(90);
+        setTotalClicks(0);
+        setGameOver(false);
+        setType([
+            { id: 1, size: "small", color: "Yellow", img: pumpkinYellow, count: 0 },
+            { id: 2, size: "medium", color: "Peach", img: pumpkinPeach, count: 0 },
+            { id: 3, size: "large", color: "Orange", img: pumpkinOrange, count: 0 },
+            { id: 4, size: "rotten", color: "Brown", img: pumpkinRotten, count: 0 },
+        ]);
+        setTimeLeft(60);
+        setTimerRunning(false);
         setRandomPumpkin(getRandomPumpkin());
     }
 
@@ -111,14 +130,14 @@ if (gameOver) {
             <h4>Stats:</h4>
             <p>Total Clicks: {totalClicks}</p>
             <p>You had {clickCount} clicks left</p>
-            <p>Time left on timer: {timeLeft} seconds</p> {/* Added line */}
-
+            <p>Time left on timer: {timeLeft} seconds</p>
             <ul>
                 {pumpkinType.map(p => {
                     const displayColor = p.color === "Brown" ? "Rotten" : p.color;
                     return <li key={p.id}>{displayColor} pumpkin clicks: {p.count}</li>
                 })}
             </ul>
+            <button className="timerButton" onClick={resetGame}>Play Again</button>
         </div>
     );
 }
