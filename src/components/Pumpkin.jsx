@@ -4,62 +4,71 @@ import pumpkinYellow from "../assets/pumpkinA.png";
 import pumpkinPeach from "../assets/pumpkinB.png";
 import pumpkinOrange from "../assets/pumpkinC.png";
 import pumpkinRotten from "../assets/pumpkinRotten.png";
+import Sidebar from "./Sidebar";
 import "../styles.css";
 
 let timer;
+let pumpkinChangeTimer;
 
-
-function Game()
-{
+function Game() {
     const [clickCount, setCount] = useState(90);
     const [totalClicks, setTotalClicks] = useState(0);
     const [gameOver, setGameOver] = useState(false);
     const [pumpkinType, setType] = useState([
-    { id: 1, size: "small", color: "Yellow", img: pumpkinYellow, count: 0 },
-    { id: 2, size: "medium", color: "Peach", img: pumpkinPeach, count: 0 },
-    { id: 3, size: "large", color: "Orange", img: pumpkinOrange, count: 0 },
-    { id: 4, size: "rotten", color: "Brown", img: pumpkinRotten, count: 0 },
+        { id: 1, size: "small", color: "Yellow", img: pumpkinYellow, count: 0 },
+        { id: 2, size: "medium", color: "Peach", img: pumpkinPeach, count: 0 },
+        { id: 3, size: "large", color: "Orange", img: pumpkinOrange, count: 0 },
+        { id: 4, size: "rotten", color: "Brown", img: pumpkinRotten, count: 0 },
     ]);
-    const [timeLeft, setTimeLeft] = useState(30); // timer
+    const [timeLeft, setTimeLeft] = useState(60);
     const [timerRunning, setTimerRunning] = useState(false);
     const [randomPumpkin, setRandomPumpkin] = useState(getRandomPumpkin());
 
-    
-//Timer functions
     function startTimer() {
-        if (timerRunning) return; // sets single timer
+        if (timerRunning) return;
         setTimerRunning(true);
 
         timer = setInterval(() => {
             setTimeLeft(prev => {
                 if (prev <= 1) {
                     clearInterval(timer);
+                    clearInterval(pumpkinChangeTimer);
                     setTimerRunning(false);
+                    setGameOver(true);
                     return 0;
                 }
                 return prev - 1;
             });
         }, 1000);
+
+        pumpkinChangeTimer = setInterval(() => {
+            setRandomPumpkin(getRandomPumpkin());
+        }, 2000);
     }
 
-     function resetTimer() {
-        clearInterval(timer);   
-        setTimeLeft(30); // reset timer to 30 seconds
+    function resetTimer() {
+        clearInterval(timer); 
+        clearInterval(pumpkinChangeTimer);
+        setTimeLeft(60);
         setTimerRunning(false);   
     }
 
-     function stopTimer() {
+    function stopTimer() {
         clearInterval(timer);
+        clearInterval(pumpkinChangeTimer);
         setTimerRunning(false);
     }
 
-//get random image function
-    function getRandomPumpkin()
-    {
-        if(!gameOver)
-        {
-            const rand = Math.floor(Math.random() * pumpkinType.length); // 0 - 3
-            return rand;
+    function getRandomPumpkin() {
+        if (!gameOver) {
+            const weighted = [
+                0,0,0,0,0,
+                1,1,1,1,1,
+                2,2,2,2,2,
+                3
+            ];
+            const randIndex = Math.floor(Math.random() * weighted.length);
+            return weighted[randIndex];
         }
         return 0;
     }
@@ -67,80 +76,69 @@ function Game()
     const pumpkin = pumpkinType[randomPumpkin];
 
     function handleClick() {
-    if (gameOver) 
-        return;
+        if (gameOver || !timerRunning) return; // Only count clicks if timer is running
 
-    setTotalClicks(function (t) {
-      return t + 1;
-    });
+        setTotalClicks(t => t + 1);
 
-    setCount(function (c) { // decrease clicks and check for 0
-        c = c -1;
+    setCount(c => {
+        c = c - 1;
         if (c <= 0) {
             setGameOver(true);
+            clearInterval(timer);
+            clearInterval(pumpkinChangeTimer);
+            setTimerRunning(false);
         }
         return c;
     });
 
-    if (pumpkin.color === "Brown") //end game if clicked
-    {
-      setGameOver(true);
-      return;
+    setType(prev => prev.map(p => p.id === pumpkin.id ? { ...p, count: p.count + 1 } : p));
+
+    if (pumpkin.color === "Brown") {
+        setGameOver(true);
+        clearInterval(timer);
+        clearInterval(pumpkinChangeTimer);
+        setTimerRunning(false);
+        return;
     }
 
-    setType(function (prev) { //count clicks for specific type
-      const updated = prev.map(function (p) {
-        if (p.id === pumpkin.id) 
-        {
-          return { ...p, count: p.count + 1 };
-        } 
-        else 
-        {
-          return p;
-        }
-      });
-      return updated;
-    });
-    
-    setRandomPumpkin(getRandomPumpkin()); //get new rand pumpkin after every click NOT second
-  }
+        setRandomPumpkin(getRandomPumpkin());
+    }
 
-    if(gameOver)
-    {
-        return(
+if (gameOver) {
+    return(
         <div className="game-over">
             <h2>Game Over!</h2>
             <h4>Stats:</h4>
+            <p>Total Clicks: {totalClicks}</p>
             <p>You had {clickCount} clicks left</p>
-            <p>You clicked a total {totalClicks} times</p>
+            <p>Time left on timer: {timeLeft} seconds</p> {/* Added line */}
+
             <ul>
-                {
-                    pumpkinType.map(function (p) {
-                    return (
-                    <li key={p.id}>
-                        {p.color} pumpkin clicks: {p.count}
-                    </li>
-                    )})
-                }
+                {pumpkinType.map(p => {
+                    const displayColor = p.color === "Brown" ? "Rotten" : p.color;
+                    return <li key={p.id}>{displayColor} pumpkin clicks: {p.count}</li>
+                })}
             </ul>
-            
         </div>
-        )
-    }
+    );
+}
+
     return(
-        <div className="main">
-        <h2>Bring the Click Count to 0 before time runs out!</h2>
-            <h3> {timeLeft} seconds </h3>
-            <button className= "timerButton" onClick={startTimer}>Start Timer</button>
-            <button className= "timerButton" onClick={stopTimer}>Stop Timer</button>
-            <button className= "timerButton" onClick={resetTimer}>Reset Timer</button>
+    <div className="game-container-horizontal">
+        <Sidebar position="left" />
+        <div className="game-main">
+            <h2>Bring the Click Count to 0 before time runs out!</h2>
+            <h3>{timeLeft} seconds</h3>
+            <button className="timerButton" onClick={startTimer}>Start Timer</button>
+            <button className="timerButton" onClick={stopTimer}>Stop Timer</button>
+            <button className="timerButton" onClick={resetTimer}>Reset Timer</button>
             
             <p>Current Clicks Remaining: {clickCount}</p>
             <p>Total Clicks: {totalClicks}</p>
-            <button className= "pumpkinButton" onClick={handleClick}>
+            <button className="pumpkinButton" onClick={handleClick}>
                 <img 
                     src={pumpkin.img} 
-                    alt="pumpkin"
+                    alt="pumpkin picture"
                     style={{
                         width: "150px",
                         height: "150px",
@@ -150,9 +148,9 @@ function Game()
                 />
             </button>
         </div>
-    )
-    
+        <Sidebar position="right" />
+    </div>
+);
 }
 
-
-export default Game
+export default Game;

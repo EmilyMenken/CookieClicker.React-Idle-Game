@@ -5,8 +5,8 @@ html {
 .pumpkinButton {
   background-color: #499f68;
   border: none;
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: 8px;
+  padding: 6px;
   transition: background-color 0.2s, transform 0.2s;
   cursor: pointer;
 }
@@ -19,9 +19,9 @@ html {
 .timerButton {
   background-color: #d0c4df;
   border: none;
-  margin: 0 5px;
-  padding: 8px 14px;
-  border-radius: 8px;
+  margin: 4px;
+  padding: 5px 10px;
+  border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -33,14 +33,98 @@ html {
 .main {
   background-color: #5e574d;
   color: #df931a;
-  padding: 20px;
+  padding: 14px;
   text-align: center;
-  border-radius: 16px;
-  max-width: 500px;
-  margin: 2rem auto;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  max-width: 400px;
+  margin: 1.5rem auto;
 }
 
 .game-over {
   text-align: center;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.game-container-horizontal {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 1rem;
+    max-width: 1000px;
+    margin: 1.5rem auto;
+}
+
+/* Left and right sidebar */
+.sidebar-left, .sidebar-right {
+    background-color: #4a3e33;
+    padding: 10px;
+    border-radius: 10px;
+    color: #df931a;
+    width: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    height: 550px;
+}
+
+.rotten-img {
+    width: 100px;
+    margin-top: 6px;
+}
+
+.normal-pumpkins {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.normal-img {
+    width: 65px;
+}
+
+/* Main pumpkin game area */
+.game-main {
+    background-color: #5e574d;
+    color: #df931a;
+    padding: 14px;
+    text-align: center;
+    border-radius: 12px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-main img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    padding: 3px;
+}
+
+header {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.game-over{
+
+  background-color: #5e574d;
+  color: #df931a;
+  padding: 14px;
+  text-align: center;
+  border-radius: 12px;
+  max-width: 400px;
+  margin: 1.5rem auto;
+
 }
