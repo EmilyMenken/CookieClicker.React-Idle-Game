@@ -9,9 +9,6 @@ import Sidebar from "./Sidebar";
 import Timer from "./Timer";
 import "../styles.css";
 
-let timer;
-let pumpkinChangeTimer;
-
 function Game() {
     const [clickCount, setCount] = useState(90);
     const [totalClicks, setTotalClicks] = useState(0);
@@ -26,9 +23,6 @@ function Game() {
     const [timeLeft, setTimeLeft] = useState(60);
     const [timerRunning, setTimerRunning] = useState(false);
     const [randomPumpkin, setRandomPumpkin] = useState(getRandomPumpkin());
-    
-    if (timerRunning) return;
-    setTimerRunning(true);
 
     function getRandomPumpkin() {
         if (!gameOver && !victory) {
@@ -43,7 +37,17 @@ function Game() {
         }
         return 0;
     }
-    
+
+    const { startTimer, stopTimer, resetTimer } = Timer({
+        setTimeLeft,
+        setTimerRunning,
+        setGameOver,
+        setRandomPumpkin,
+        getRandomPumpkin,
+        setCount,
+        setTotalClicks
+    });
+
     const pumpkin = pumpkinType[randomPumpkin];
 
     function handleClick() {
@@ -51,35 +55,28 @@ function Game() {
 
         setTotalClicks(t => t + 1);
 
-    setCount(c => {
-        c = c - 1;
-        if (c <= 0) {
-            setVictory(true);
-            clearInterval(timer);
-            clearInterval(pumpkinChangeTimer);
-            setTimerRunning(false);
+        setCount(c => {
+            c = c - 1;
+            if (c <= 0) {
+                setVictory(true);
+                stopTimer();
+            }
+            return c;
+        });
+
+        setType(prev => prev.map(p => p.id === pumpkin.id ? { ...p, count: p.count + 1 } : p));
+
+        if (pumpkin.color === "Brown") {
+            setGameOver(true);
+            stopTimer();
+            return;
         }
-        return c;
-    });
 
-    setType(prev => prev.map(p => p.id === pumpkin.id ? { ...p, count: p.count + 1 } : p));
-
-    if (pumpkin.color === "Brown") {
-        setGameOver(true);
-        clearInterval(timer);
-        clearInterval(pumpkinChangeTimer);
-        setTimerRunning(false);
-        return;
+        setRandomPumpkin(getRandomPumpkin());
     }
 
-    setRandomPumpkin(getRandomPumpkin());
-}
-
     function resetGame() {
-        clearInterval(timer);
-        clearInterval(pumpkinChangeTimer);
-        setCount(90);
-        setTotalClicks(0);
+        resetTimer();
         setGameOver(false);
         setVictory(false);
         setType([
@@ -88,8 +85,6 @@ function Game() {
             { id: 3, size: "large", color: "Orange", img: pumpkinOrange, count: 0 },
             { id: 4, size: "rotten", color: "Brown", img: pumpkinRotten, count: 0 },
         ]);
-        setTimeLeft(60);
-        setTimerRunning(false);
         setRandomPumpkin(getRandomPumpkin());
     }
 
