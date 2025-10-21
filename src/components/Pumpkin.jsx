@@ -6,6 +6,7 @@ import pumpkinOrange from "../assets/pumpkinC.png";
 import pumpkinRotten from "../assets/pumpkinRotten.png";
 import pumpkinWinner from "../assets/pumpkinVictory.png";
 import Sidebar from "./Sidebar";
+import Timer from "./Timer";
 import "../styles.css";
 
 let timer;
@@ -25,43 +26,9 @@ function Game() {
     const [timeLeft, setTimeLeft] = useState(60);
     const [timerRunning, setTimerRunning] = useState(false);
     const [randomPumpkin, setRandomPumpkin] = useState(getRandomPumpkin());
-
-    function startTimer() {
-        if (timerRunning) return;
-        setTimerRunning(true);
-
-        timer = setInterval(() => {
-            setTimeLeft(prev => {
-                if (prev <= 1) {
-                    clearInterval(timer);
-                    clearInterval(pumpkinChangeTimer);
-                    setTimerRunning(false);
-                    setGameOver(true);
-                    return 0;
-                }
-                return prev - 1;
-            });
-        }, 1000);
-
-        pumpkinChangeTimer = setInterval(() => {
-            setRandomPumpkin(getRandomPumpkin());
-        }, 2000);
-    }
-
-    function resetTimer() {
-        clearInterval(timer); 
-        clearInterval(pumpkinChangeTimer);
-        setTimeLeft(60);
-        setCount(90);
-        setTotalClicks(0);  
-        setTimerRunning(false);   
-    }
-
-    function stopTimer() {
-        clearInterval(timer);
-        clearInterval(pumpkinChangeTimer);
-        setTimerRunning(false);
-    }
+    
+    if (timerRunning) return;
+    setTimerRunning(true);
 
     function getRandomPumpkin() {
         if (!gameOver && !victory) {
