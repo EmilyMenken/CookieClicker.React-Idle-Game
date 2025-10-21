@@ -132,11 +132,18 @@ header {
 header{
 
   background-image: url("./assets/sign.png");
-  background-size: cover; 
+  background-size: 800px; 
   background-position: center;
   background-repeat: no-repeat; 
   height: 90px; 
 
-  color:rgb(0, 0, 0);
+  /* color:rgb(0, 0, 0); */
 
+
+}
+
+header h1{
+  background-image: linear-gradient(to right,rgb(56, 26, 1), rgb(101, 17, 2), rgb(80, 73, 0));
+  color: transparent;
+  background-clip: text;
 }
