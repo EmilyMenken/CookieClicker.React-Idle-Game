@@ -1,3 +1,5 @@
+let timer = null;
+let pumpkinChangeTimer = null;
 
 function Timer({
     setTimeLeft,
@@ -9,15 +11,16 @@ function Timer({
     setTotalClicks
 }) {
 
-    let timer;
-    let pumpkinChangeTimer;
-
     function startTimer() {
+        if (timer || pumpkinChangeTimer) return; // prevent multiple intervals
+
         timer = setInterval(() => {
             setTimeLeft(prev => {
                 if (prev <= 1) {
                     clearInterval(timer);
                     clearInterval(pumpkinChangeTimer);
+                    timer = null;
+                    pumpkinChangeTimer = null;
                     setTimerRunning(false);
                     setGameOver(true);
                     return 0;
@@ -34,14 +37,26 @@ function Timer({
     }
 
     function stopTimer() {
-        clearInterval(timer);
-        clearInterval(pumpkinChangeTimer);
+        if (timer) {
+            clearInterval(timer);
+            timer = null;
+        }
+        if (pumpkinChangeTimer) {
+            clearInterval(pumpkinChangeTimer);
+            pumpkinChangeTimer = null;
+        }
         setTimerRunning(false);
     }
 
     function resetTimer() {
-        clearInterval(timer);
-        clearInterval(pumpkinChangeTimer);
+        if (timer) {
+            clearInterval(timer);
+            timer = null;
+        }
+        if (pumpkinChangeTimer) {
+            clearInterval(pumpkinChangeTimer);
+            pumpkinChangeTimer = null;
+        }
         setTimeLeft(60);
         setCount(90);
         setTotalClicks(0);
