@@ -27,6 +27,8 @@ function Game() {
     const [timerRunning, setTimerRunning] = useState(false);
     const [randomPumpkin, setRandomPumpkin] = useState(getRandomPumpkin());
     
+    
+
     if (timerRunning) return;
     setTimerRunning(true);
 

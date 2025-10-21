@@ -1,6 +1,6 @@
 import Pumpkin from "./Pumpkin";
 
-function Timer(props){
+function Timer(timeLeft, timerRunning){
 
     let timer;
     let pumpkinChangeTimer;
@@ -39,5 +39,20 @@ function Timer(props){
             clearInterval(pumpkinChangeTimer);
             setTimerRunning(false);
         }
+        //game over 
+        return(
+            <p>Time left on timer: {timeLeft} seconds</p>
+
+
+        )
+
+        // <h2>Bring the Click Count to 0 before time runs out!</h2>
+        //     <h3>{timeLeft} seconds</h3>
+        //     <button className="timerButton" onClick={startTimer}>Start Timer</button>
+        //     <button className="timerButton" onClick={stopTimer}>Stop Timer</button>
+        //     <button className="timerButton" onClick={resetTimer}>Reset Timer</button>
+            
+        
+
 
 }
