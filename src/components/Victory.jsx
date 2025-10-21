@@ -1,5 +1,8 @@
+import pumpkinWinner from "../assets/pumpkinVictory.png";
+import "../styles.css";
 
-function Victory(){
+function Victory({ totalClicks, timeLeft, pumpkinType, resetGame }) {
+
     return(
         <div className="game-over">
             <h2>Great job! You saved the pumpkin patch!</h2>
@@ -17,3 +20,5 @@ function Victory(){
         </div>
     )
 }
+
+export default Victory;

@@ -4,7 +4,6 @@ import pumpkinYellow from "../assets/pumpkinA.png";
 import pumpkinPeach from "../assets/pumpkinB.png";
 import pumpkinOrange from "../assets/pumpkinC.png";
 import pumpkinRotten from "../assets/pumpkinRotten.png";
-import pumpkinWinner from "../assets/pumpkinVictory.png";
 import Sidebar from "./Sidebar";
 import Timer from "./Timer";
 import Victory from "./Victory"
@@ -92,13 +91,24 @@ function Game() {
 
 if (victory) {
     return(
-        <Victory />
+        <Victory
+            totalClicks={totalClicks}
+            timeLeft={timeLeft}
+            pumpkinType={pumpkinType}
+            resetGame={resetGame}
+        />
     )
 }
 
 if (gameOver) {
     return(
-        <Loss />
+        <Loss
+            totalClicks={totalClicks}
+            clickCount={clickCount}
+            timeLeft={timeLeft}
+            pumpkinType={pumpkinType}
+            resetGame={resetGame}
+        />
     )
 }
 
