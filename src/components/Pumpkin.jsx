@@ -107,7 +107,7 @@ if (gameOver) {
             clickCount={clickCount}
             timeLeft={timeLeft}
             pumpkinType={pumpkinType}
-            resetGame={resetGame}
+            resetGame={resetGame()}
         />
     )
 }
