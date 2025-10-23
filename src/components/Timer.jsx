@@ -1,5 +1,3 @@
-let timer = null;
-let pumpkinChangeTimer = null;
 
 function Timer({
     setTimeLeft,
@@ -11,8 +9,11 @@ function Timer({
     setTotalClicks
 }) {
 
+    let timer = null;
+    let pumpkinChangeTimer = null;
+
     function startTimer() {
-        if (timer || pumpkinChangeTimer) return; // prevent multiple intervals
+        if (timer || pumpkinChangeTimer) return;
 
         timer = setInterval(() => {
             setTimeLeft(prev => {
