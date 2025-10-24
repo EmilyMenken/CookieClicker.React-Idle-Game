@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://emilymenken.github.io/CookieClicker.React-Idle-Game",
+  "homepage": "https://emilymenken.github.io/CookieClicker-React-Idle-Game",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
